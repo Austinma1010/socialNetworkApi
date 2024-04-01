@@ -27,8 +27,18 @@ module.exports = {
     async createUser(req, res) {
         try {
             const user = await User.create(req.body);
+            const existingUsers = await User.find();
+
+            // Assign a subset of existing users' _ids to the friends array of the newly created user
+            const friendIds = existingUsers.map(existingUser => existingUser._id);
+            user.friends = friendIds.filter(id => id !== user._id); // Exclude self from friends
+    
+            // Save the updated user document
+            await user.save();
+            console.log('created User');
             res.json(user);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },

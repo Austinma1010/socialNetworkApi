@@ -1,15 +1,15 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model,  Types } = require('mongoose');
 
 const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: new ObjectId,
+            default: () => new Types.ObjectId(),
         },
         reactionBody: {
             type: String,
             required: true,
-            max_length: 280,
+            maxlength: 280,
         },
         userName: {
             type: String,
@@ -23,9 +23,9 @@ const reactionSchema = new Schema(
 )
 
 reactionSchema.virtual('timeStamp').get(function () {
-    return this.createdAt.toLocalString();
+    return this.createdAt.toLocaleString();
 });
 
-const Reaction = model('reaction', reactionSchema);
 
-module.exports = Reaction;
+
+module.exports = reactionSchema;
