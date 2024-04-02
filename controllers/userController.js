@@ -3,9 +3,10 @@ const { User, Thought } = require('../models/index');
 module.exports = {
     async getUsers(req, res) {
         try {
-            const users = await User.find().populate('thoughts');
+            const users = await User.find();
             res.json(users);
         } catch (err) {
+            console.error(err);
             res.status(500).json(err);
         }
     },
@@ -20,6 +21,7 @@ module.exports = {
 
             res.json(user);
         } catch (err) {
+            console.error(err);
             res.status(500).json(err);
         }
     },
@@ -59,7 +61,7 @@ module.exports = {
 
     async updateUser(req, res) {
         try {
-            const user = await User.findOneandUpdate(
+            const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
                 { $set: req.body },
                 { runValidators: true, new: true }
@@ -71,6 +73,7 @@ module.exports = {
 
             res.json(user);
         } catch (err) {
+            console.error(err);
             res.status(500).json(err);
         }
     }

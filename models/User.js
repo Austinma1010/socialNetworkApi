@@ -31,10 +31,10 @@ const userSchema = new Schema(
     }
 );
 
-userSchema.virtual('friendCount')
-.get(function () {
-    return `${friends.length}`;
-});
+// userSchema.virtual('friendCount')
+// .get(function () {
+//     return `${friends.length}`;
+// });
 
 const User = model('user', userSchema);
 module.exports = User;

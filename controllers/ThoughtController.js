@@ -24,6 +24,7 @@ module.exports = {
             const thought = await Thought.create(req.body);
             res.json(thought);
         } catch (err) {
+            console.error(err);
             res.status(500).json(err);
         }
     },

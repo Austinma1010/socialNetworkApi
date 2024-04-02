@@ -28,7 +28,7 @@ const thoughtSchema = new Schema(
 );
 
 thoughtSchema.virtual('timeStamp').get(function () {
-    return this.createdAt.toLocalString();
+    return this.createdAt.toLocaleString();
 });
 
 thoughtSchema.virtual('reactionCount').get(function () {
